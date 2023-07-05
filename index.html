@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jumper</title>
+    <style type="text/css" media="screen, print">
+        body {
+            overflow:hidden;
+            background: #000000;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+            display:flex;
+        }
+    </style>
+</head>
+<body>
+        <script id="shader" type="shader">
+
+                precision mediump float;
+            
+                varying vec2 vTextureCoord;
+                uniform sampler2D uSampler;
+                uniform vec2 dimensions;
+                uniform vec4 filterArea;
+                uniform float offVal;
+                uniform bool enabled;
+                uniform bool grayscale;
+                uniform float grayval;
+                
+        
+                void main(){
+                    gl_FragColor = texture2D(uSampler, vTextureCoord);
+        
+                    if(enabled)
+                    {
+                        gl_FragColor = vec4(texture2D(uSampler, vTextureCoord+vec2(0,-offVal)).r,texture2D(uSampler, vTextureCoord+vec2(offVal,0)).g,texture2D(uSampler, vTextureCoord+vec2(-offVal,0)).b,1.0);
+                    }
+                    
+                    else if(grayscale)
+                    {
+                        float grey = 0.3*texture2D(uSampler, vTextureCoord).r + 0.59*texture2D(uSampler, vTextureCoord).g + 0.11*texture2D(uSampler, vTextureCoord).b;
+        
+                        gl_FragColor = vec4(
+                            texture2D(uSampler, vTextureCoord).r*grayval + grey*(1.0-grayval),
+                            texture2D(uSampler, vTextureCoord).g*grayval + grey*(1.0-grayval),
+                            texture2D(uSampler, vTextureCoord).b*grayval + grey*(1.0-grayval),
+                            1.0
+                        );
+                        
+                    }           
+                }
+            
+            </script>
+    <!-- app bundle will be injected here -->
+</body>
+</html>
