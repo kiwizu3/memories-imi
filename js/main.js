@@ -395,9 +395,9 @@ function init() {
             "audio/sfx_v2.mp3",
             "audio/bg.mp3"
         ])
-        .on("progress", loadHandler)
-        .on('complete', loadComplete)
-        .load(setup);
+        // .on("progress", loadHandler)
+        // .on('complete', loadComplete)
+        // .load(setup);
 
     var graphics = new PIXI.Graphics();
 

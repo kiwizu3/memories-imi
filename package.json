@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build_prod": "webpack --env=production_build",
-    "build_test": "webpack --env=development_build",
-    "test_game": "node_modules/.bin/webpack-dev-server --env=development_server",
+    "build_test": "webpack --env=development_build --openssl-legacy-provider start",
+    "test_game": "node_modules/.bin/webpack-dev-server --env=development_server --openssl-legacy-provider start",
     "prod_game": "node_modules/.bin/webpack-dev-server --env=production_server"
   },
   "author": "Buddhika Jayawickrama, Hashan Chandika",
